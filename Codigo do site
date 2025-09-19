@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Filme Carros — Projeto de Marcos Vinicius</title>
+  <meta name="author" content="Marcos Vinicius">
+  <style>
+    :root{
+      --bg:#f6f7fb; --card:#ffffff; --text:#1b1b1f; --muted:#6b7280; --accent:#0ea5a4;
+      --radius:12px; --max-width:1100px; --base-font:16px;
+    }
+
+    body[data-contrast="high"] { background:#000; color:#fff; }
+    body[data-contrast="high"] a { color:#000000; }
+    body[data-contrast="high"] .card { background:#111; color:#fff; }
+
+    html{font-size:var(--base-font)}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased}
+    header{background:linear-gradient(90deg,#e6f7f7 0%, #ffffff 100%); padding:18px 16px; box-shadow:0 2px 6px rgba(12,12,18,.06)}
+    .container{max-width:var(--max-width); margin:20px auto; padding:0 16px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand h1{font-size:1.25rem; margin:0}
+    nav.primary{margin-top:12px}
+    nav.primary ul{display:flex; gap:10px; list-style:none; padding:0; margin:0}
+    nav.primary a{padding:8px 12px; border-radius:8px; text-decoration:none; color:inherit; display:inline-block}
+    nav.primary a:focus{outline:3px solid #ffd54f; outline-offset:2px}
+
+    main{display:block}
+    article.card{background:var(--card); padding:18px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(11,14,20,.06)}
+    .controls{display:flex; flex-wrap:wrap; gap:8px}
+    button{background:#0ea5a4; color:white; border:none; padding:8px 10px; border-radius:8px; cursor:pointer}
+    button:focus{outline:3px solid #ffd54f}
+
+    .accessibility-panel{margin-top:20px}
+    .sr-only{position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden}
+
+    footer{margin-top:30px; padding:18px 0; text-align:center; color:var(--muted)}
+
+    @media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#main-content">Pular para o conteúdo</a>
+  <header role="banner">
+    <div class="container">
+      <div class="brand">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='52' height='52'><rect rx='10' width='52' height='52' fill='%230ea5a4'/><text x='50%' y='52%' font-size='20' text-anchor='middle' fill='white' font-family='Arial' dy='.35em'>MV</text></svg>" alt="Logo Marcos Vinicius" width="48" height="48">
+        <div>
+          <h1>Filme Carros — Projeto de Marcos Vinicius</h1>
+          <p style="margin:2px 0 0; color:var(--muted); font-size:.95rem">Um site dedicado ao universo de "Carros" (Disney·Pixar).</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="main-content">
+    <article class="card" tabindex="0">
+      <h2>Carros O Filme</h2>
+      <p>"Carros" é uma animação lançada em 2006 pela Disney·Pixar. O filme apresenta um mundo onde veículos são seres vivos, com personalidades próprias. O protagonista é Relâmpago McQueen, um carro de corrida ambicioso que aprende lições importantes sobre amizade, humildade e comunidade ao se perder na cidade de Radiator Springs.</p>
+
+      <p>Além da história emocionante, o longa é conhecido por sua animação detalhada, a trilha sonora marcante e os personagens carismáticos como Mate, Sally e Doc Hudson. O sucesso foi tão grande que originou continuações e uma franquia multimídia.</p>
+
+      <h3>Principais mensagens do filme</h3>
+      <ul>
+        <li>A importância de valorizar amizades verdadeiras.</li>
+        <li>Humildade é essencial, mesmo para campeões.</li>
+        <li>O valor das pequenas comunidades e tradições.</li>
+      </ul>
+
+      <p>Com humor, emoção e visuais incríveis, "Carros" conquistou tanto crianças quanto adultos e se tornou um dos grandes clássicos da Pixar.</p>
+    </article>
+
+    <aside class="card accessibility-panel">
+      <h2>Painel de Acessibilidade</h2>
+      <div class="controls">
+        <button id="increase-font">Aumentar fonte</button>
+        <button id="decrease-font">Diminuir fonte</button>
+        <button id="toggle-contrast">Alternar contraste</button>
+        <button id="reset-prefs">Restaurar padrão</button>
+      </div>
+      <p style="margin-top:12px; color:var(--muted)"><strong>Créditos:</strong> Projeto feito por Marcos Vinicius.</p>
+    </aside>
+  </main>
+
+ 
+
+  <script>
+    let prefs = JSON.parse(localStorage.getItem("carrosPrefs")) || { font: 100, contrast: false };
+
+    function applyPrefs() {
+      document.documentElement.style.fontSize = prefs.font + "%";
+      if (prefs.contrast) {
+        document.body.setAttribute("data-contrast", "high");
+      } else {
+        document.body.removeAttribute("data-contrast");
+      }
+    }
+
+    function savePrefs() {
+      localStorage.setItem("carrosPrefs", JSON.stringify(prefs));
+    }
+
+    document.getElementById("increase-font").addEventListener("click", () => {
+      prefs.font = Math.min(150, prefs.font + 10);
+      applyPrefs();
+      savePrefs();
+    });
+
+    document.getElementById("decrease-font").addEventListener("click", () => {
+      prefs.font = Math.max(80, prefs.font - 10);
+      applyPrefs();
+      savePrefs();
+    });
+
+    document.getElementById("toggle-contrast").addEventListener("click", () => {
+      prefs.contrast = !prefs.contrast;
+      applyPrefs();
+      savePrefs();
+    });
+
+    document.getElementById("reset-prefs").addEventListener("click", () => {
+      prefs = { font: 100, contrast: false };
+      applyPrefs();
+      savePrefs();
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    applyPrefs();
+  </script>
+</body>
+</html>
