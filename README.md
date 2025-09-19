@@ -12,8 +12,6 @@
 
   <header role="banner">
     <div class="container">
-      <div class="brand">
-        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='52' height='52'><rect rx='10' width='52' height='52' fill='%230ea5a4'/><text x='50%' y='52%' font-size='20' text-anchor='middle' fill='white' font-family='Arial' dy='.35em'>MV</text></svg>" alt="Logo Marcos Vinicius" width="48" height="48">
         <div>
           <h1>Filme Carros — Projeto de Marcos Vinicius</h1>
           <p style="margin:2px 0 0; color:var(--muted); font-size:.95rem">Um site dedicado ao universo de "Carros" (Disney·Pixar).</p>
